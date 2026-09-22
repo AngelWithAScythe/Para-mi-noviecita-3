@@ -4,11 +4,21 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    min-height: 100%;
+    /* Previene el scroll horizontal si algo se sale */
+    overflow-x: hidden; 
+}
+
 .wallpaper {
     position: relative;
     width: 100%;
     min-height: 100dvh; /* usa dvh en lugar de vh para adaptarse mejor a móviles */
-    overflow: hidden;   /* evita desbordamientos no deseados */
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
 }
 
 .wallpaper::before {
@@ -16,7 +26,7 @@
     background-image: url("../Sources/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     position: absolute;
     inset: 0;           /* equivalente moderno a top:0; left:0; right:0; bottom:0; */
     z-index: -1;
@@ -51,11 +61,11 @@
 }
 
 /* Ajustes específicos para pantallas de escritorio (pantallas anchas) */
-@media (min-width: 768px) {
-    .enlace-zona {
-        top: 60%;
-        left: 15%;
-        width: 30%;
-        height: 35%;
+@media (max-width: 768px) {
+    .wallpaper::before {
+        /* Si tu imagen de fondo tiene texto dibujado, 'contain' evita que se corte */
+        /* Si prefieres que llene toda la pantalla sin barras negras, usa 'cover' y centra el foco */
+        background-size: cover; 
+        background-position: center top; /* Alinea arriba para no cortar lo importante */
     }
 }
