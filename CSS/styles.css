@@ -7,18 +7,24 @@
 html, body {
     width: 100%;
     min-height: 100%;
-    /* Previene el scroll horizontal si algo se sale */
     overflow-x: hidden; 
 }
 
+.cherry-bomb-one-regular {
+    font-family: "Cherry Bomb One", system-ui, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Fondo principal */
 .wallpaper {
     position: relative;
     width: 100%;
-    min-height: 100dvh; /* usa dvh en lugar de vh para adaptarse mejor a móviles */
-    overflow: hidden; 
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
+    padding: 20px;
 }
 
 .wallpaper::before {
@@ -26,46 +32,54 @@ html, body {
     background-image: url("../Sources/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     position: absolute;
-    inset: 0;           /* equivalente moderno a top:0; left:0; right:0; bottom:0; */
+    inset: 0;
     z-index: -1;
     opacity: 0.9;
 }
 
-.cherry-bomb-one-regular {
-    font-family: "Cherry Bomb One", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-
+/* Contenedor apilado en columna */
 .container {
     display: flex;
+    flex-direction: column; /* Organiza los elementos de arriba a abajo */
     justify-content: center;
     align-items: center;
-    min-height: 100dvh;
+    gap: 15px; /* Espaciado entre elementos */
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
 }
 
 .titulo {
-    transform: translateY(2vh);
-    text-align: center;
-    font-size: clamp(1.8rem, 5vw, 3.5rem); /* ajusta el tamaño del texto según el dispositivo */
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
+    color: #000;
 }
 
+.subtitulo {
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+    color: #000;
+}
+
+/* Contenedor de la imagen y el enlace interactivo */
+.imagen {
+    position: relative; /* Indispensable para que .enlace-zona se origine dentro de esta caja */
+    display: inline-block;
+    max-width: 80%;
+}
+
+.imagen img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Zona cliqueable dentro de la imagen de Levi */
 .enlace-zona {
     position: absolute;
-    top: 55%;
-    left: 10%;
-    width: 80%;  /* En móvil es mejor dar mayor área de toque */
-    height: 30%;
-}
-
-/* Ajustes específicos para pantallas de escritorio (pantallas anchas) */
-@media (max-width: 768px) {
-    .wallpaper::before {
-        /* Si tu imagen de fondo tiene texto dibujado, 'contain' evita que se corte */
-        /* Si prefieres que llene toda la pantalla sin barras negras, usa 'cover' y centra el foco */
-        background-size: cover; 
-        background-position: center top; /* Alinea arriba para no cortar lo importante */
-    }
+    top: 40%;    /* Ajusta estos valores según la ubicación exacta de la imagen */
+    left: 25%;
+    width: 50%;
+    height: 40%;
+    /* background: rgba(255, 0, 0, 0.3); Descomenta esto para ver el área cliqueable en pruebas */
 }
